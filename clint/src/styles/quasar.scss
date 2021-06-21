@@ -1,0 +1,12 @@
+@import "./quasar.variables.scss";
+@import "~quasar-styl";
+// @import '~quasar-addon-styl';
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700&display=swap");
+
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+.vue-grid-item .q-toolbar {
+    min-height: 32px !important;
+}
