@@ -48,13 +48,14 @@ export default {
             this.sendRemoveGridItem(i)
         },
         movedEvent(i, x, y) {
-            console.log({ i, x, y })
-            this.ActionUpdateMovedLayout({ i, x, y })
-            this.sendUpdateGrid(this.layoutControll)
+            // this.ActionUpdateMovedLayout({ i, x, y })
+            // this.sendUpdateGrid(this.layoutControll)
+            this.sendMoveGridItem({ i, x, y })
         },
         resizedEvent(i, h, w) {
-            this.ActionUpdateResizedLayout({ i, h, w })
-            this.sendUpdateGrid(this.layoutControll)
+            // this.ActionUpdateResizedLayout({ i, h, w })
+            // this.sendUpdateGrid(this.layoutControll)
+            this.sendResizeGridItem({ i, h, w })
         },
         sendAddGridItem(data) {
             sendEvent({
@@ -68,6 +69,24 @@ export default {
         sendRemoveGridItem(data) {
             sendEvent({
                 type: "remove-grid-item",
+                data: {
+                    message: data,
+                    sent: Date.now(),
+                },
+            });
+        },
+        sendResizeGridItem(data) {
+            sendEvent({
+                type: "resize-grid-item",
+                data: {
+                    message: data,
+                    sent: Date.now(),
+                },
+            });
+        },
+        sendMoveGridItem(data) {
+            sendEvent({
+                type: "move-grid-item",
                 data: {
                     message: data,
                     sent: Date.now(),

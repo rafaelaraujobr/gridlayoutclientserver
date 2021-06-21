@@ -32,6 +32,11 @@ import LayoutServices from "@/mixins/LayoutServices";
 export default {
   name: "MenuContextGrid",
   mixins: [LayoutServices],
+  data(){
+    return{
+      
+    }
+  }
 };
 </script>
 
