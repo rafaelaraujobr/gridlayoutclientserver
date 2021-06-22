@@ -16,32 +16,48 @@
           size="1rem"
         />
         <q-separator vertical spaced />
-        <q-toolbar-title> Controll</q-toolbar-title>
+        <q-toolbar-title>Multis Controll - POC</q-toolbar-title>
         <q-separator vertical spaced />
         <q-btn
           flat
           dense
           round
-          @click="leftDrawerOpen = !leftDrawerOpen"
-          aria-label="Menu"
-          icon="menu"
+          @click="rightDrawerOpen = !rightDrawerOpen"
+          icon="mdi-tune"
           size="1rem"
         />
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" bordered content-class="bg-grey-2">
+    <q-drawer v-model="leftDrawerOpen" overlay bordered content-class="bg-white">
       <q-list>
-        <q-item clickable to="/display">
+        <q-item clickable to="/">
           <q-item-section avatar>
-            <q-icon name="school" />
+            <q-icon name="mdi-gamepad" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Controll</q-item-label>
+            <q-item-label caption>Display control</q-item-label>
+          </q-item-section>
+        </q-item>
+         <q-item clickable to="/display">
+          <q-item-section avatar>
+            <q-icon name="mdi-presentation" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Display</q-item-label>
-            <q-item-label caption>quasar.dev</q-item-label>
+            <q-item-label caption>Presentation panel </q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
+    </q-drawer>
+    <q-drawer
+      side="right"
+      v-model="rightDrawerOpen"
+      bordered
+      overlay
+      content-class="bg-white"
+    >
     </q-drawer>
 
     <q-page-container class="bg-grey-2">
@@ -57,6 +73,7 @@ export default {
   data() {
     return {
       leftDrawerOpen: false,
+      rightDrawerOpen: false,
     };
   },
   created() {
