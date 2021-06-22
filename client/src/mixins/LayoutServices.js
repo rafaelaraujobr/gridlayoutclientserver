@@ -9,7 +9,8 @@ export default {
             "ActionSetDisplaySize",
             "ActionUpdateMovedLayout",
             "ActionUpdateResizedLayout",
-            "ActionSetPositionAddGridItem"
+            "ActionSetPositionAddGridItem",
+            "ActionSetLauncher"
         ]),
         async getCellFromPixel(event, id) {
             let el = document.getElementById(id);
@@ -32,7 +33,8 @@ export default {
             })
             console.log(this.positionAddGridItem);
         },
-        addGridItem(type = "webview", extras) {
+
+        addFastGridItem(data) {
             this.sendAddGridItem({
                 x: this.positionAddGridItem.x,
                 y: this.positionAddGridItem.y,
@@ -40,22 +42,25 @@ export default {
                 w: 1,
                 i: uid(),
                 maximize: false,
-                type,
-                extras,
+                type: data.type,
+                name: data.name,
+                extras: data.extras,
             });
         },
         removeGridItem(i) {
             this.sendRemoveGridItem(i)
         },
         movedEvent(i, x, y) {
-            // this.ActionUpdateMovedLayout({ i, x, y })
-            // this.sendUpdateGrid(this.layoutControll)
             this.sendMoveGridItem({ i, x, y })
         },
         resizedEvent(i, h, w) {
-            // this.ActionUpdateResizedLayout({ i, h, w })
-            // this.sendUpdateGrid(this.layoutControll)
             this.sendResizeGridItem({ i, h, w })
+        },
+        muteGridItem(i, mute) {
+            this.sendMuteGridItem({ i, mute })
+        },
+        maximizeGridItem(i, maximize) {
+            this.sendMaximizeGridItem({ i, maximize })
         },
         sendAddGridItem(data) {
             sendEvent({
@@ -87,6 +92,33 @@ export default {
         sendMoveGridItem(data) {
             sendEvent({
                 type: "move-grid-item",
+                data: {
+                    message: data,
+                    sent: Date.now(),
+                },
+            });
+        },
+        sendThumbGridItem(data) {
+            sendEvent({
+                type: "thumb-grid-item",
+                data: {
+                    message: data,
+                    sent: Date.now(),
+                },
+            });
+        },
+        sendMuteGridItem(data) {
+            sendEvent({
+                type: "mute-grid-item",
+                data: {
+                    message: data,
+                    sent: Date.now(),
+                },
+            });
+        },
+        sendMaximizeGridItem(data) {
+            sendEvent({
+                type: "maximize-grid-item",
                 data: {
                     message: data,
                     sent: Date.now(),
@@ -131,7 +163,19 @@ export default {
             "layoutControll",
             "optionGrid",
             "displaySize",
-            "positionAddGridItem"
+            "positionAddGridItem",
+            "launcher"
         ]),
+        maximizeStyle() {
+            return {
+                height: "90vh",
+                width: "90vw",
+                transform: "none !important",
+                position: "fixed",
+                top: "5vh",
+                left: "5vw",
+                zIndex: 3002,
+            };
+        },
     },
 };

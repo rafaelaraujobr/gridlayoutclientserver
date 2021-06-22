@@ -10,3 +10,11 @@ body {
 .vue-grid-item .q-toolbar {
     min-height: 32px !important;
 }
+
+.q-item__section--avatar {
+    min-width: 0;
+}
+
+.maximized-item {
+    border: 1px solid $primary !important;
+}

@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page padding>
     <q-resize-observer @resize="onResize" debounce="5000" />
     <grid-controller :size="size" />
   </q-page>

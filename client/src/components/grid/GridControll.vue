@@ -23,12 +23,15 @@
         :h="item.h"
         :i="item.i"
         :key="item.i"
+        drag-allow-from=".header-app"
+        drag-ignore-from=".no-drag"
         @resized="resizedEvent"
         @moved="movedEvent"
       >
         <grid-item-controll :item="item" />
       </grid-item>
     </grid-layout>
+    <launcher />
   </q-card>
 </template>
 
@@ -40,6 +43,7 @@ import { GridLayout, GridItem } from "vue-grid-layout";
 import LayoutServices from "@/mixins/LayoutServices";
 import MenuContextGrid from "./MenuContextGrid.vue";
 import GridItemControll from "@/components/grid/GridItemControll.vue";
+import Launcher from "../launcher/Launcher.vue";
 export default {
   name: "GridControll",
   mixins: [LayoutServices],
@@ -56,6 +60,7 @@ export default {
     GridItem,
     MenuContextGrid,
     GridItemControll,
+    Launcher,
   },
   computed: {
     rowHeight() {

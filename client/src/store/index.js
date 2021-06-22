@@ -12,7 +12,8 @@ export default new Vuex.Store({
     positionAddGridItem: {
       x: 0,
       y: 0
-    }
+    },
+    launcher: false
   },
   getters: {
     layoutControll: (state) => state.layoutControll,
@@ -20,6 +21,8 @@ export default new Vuex.Store({
     optionGrid: (state) => state.optionGrid,
     displaySize: (state) => state.displaySize,
     positionAddGridItem: (state) => state.positionAddGridItem,
+
+    launcher: (state) => state.launcher,
   },
   mutations: {
     SET_LAYOUTCONTROLL(state, payload) {
@@ -48,6 +51,9 @@ export default new Vuex.Store({
       newItem.h = payload.h
       Object.assign(item, newItem)
     },
+    SET_LAUNCHER(state, payload) {
+      state.launcher = payload;
+    },
   },
   actions: {
     ActionSetLayoutControll({ commit }, payload) {
@@ -67,6 +73,9 @@ export default new Vuex.Store({
     },
     ActionSetPositionAddGridItem({ commit }, payload) {
       commit("SET_POSITIONADDGRIDITEM", payload);
+    },
+    ActionSetLauncher({ commit }, payload) {
+      commit("SET_LAUNCHER", payload);
     },
   },
   modules: {
