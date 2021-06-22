@@ -1,5 +1,5 @@
 <template>
-  <q-page padding>
+  <q-page>
     <q-resize-observer @resize="onResize" debounce="5000" />
     <grid-controller :size="size" />
   </q-page>
@@ -7,8 +7,10 @@
 
 <script>
 import GridController from "@/components/grid/GridControll.vue";
+import LayoutServices from "@/mixins/LayoutServices";
 export default {
   name: "Controll",
+  mixins: [LayoutServices],
   data() {
     return {
       size: {
@@ -24,6 +26,9 @@ export default {
     onResize(size) {
       this.size = size;
     },
+  },
+  created() {
+    this.ActionSetHeader(true);
   },
 };
 </script>

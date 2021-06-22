@@ -1,9 +1,10 @@
 <template>
-  <q-card flat bordered>
+  <q-card flat>
     <grid-layout
       :layout.sync="layoutControll"
       :col-num="optionGrid.colNum"
       :max-rows="optionGrid.maxRows"
+      :row-height="rowHeight"
       :is-draggable="false"
       :is-resizable="false"
       :is-mirrored="false"
@@ -14,7 +15,6 @@
       id="gridControl"
       :style="styleGrid"
     >
-      <menu-context-grid />
       <grid-item
         v-for="item in layoutControll"
         :x="item.x"
@@ -25,11 +25,18 @@
         :key="item.i"
         @resized="resizedEvent"
         @moved="movedEvent"
+        class="no-scroll hide-scrollbar non-selectable"
         :style="item.maximize ? maximizeStyle : ''"
       >
         <grid-item-display :item="item" />
       </grid-item>
     </grid-layout>
+    <q-icon
+      name="mdi-cursor-pointer"
+      size="md"
+      color="primary"
+      :style="`top:${mousePosition.y}px;left:${mousePosition.x}px; position:absolute`"
+    />
   </q-card>
 </template>
 
@@ -39,7 +46,6 @@
 <script>
 import { GridLayout, GridItem } from "vue-grid-layout";
 import LayoutServices from "@/mixins/LayoutServices";
-import MenuContextGrid from "./MenuContextGrid.vue";
 import GridItemDisplay from "@/components/grid/GridItemDisplay.vue";
 export default {
   name: "GridDisplay",
@@ -55,7 +61,6 @@ export default {
   components: {
     GridLayout,
     GridItem,
-    MenuContextGrid,
     GridItemDisplay,
   },
   computed: {
@@ -79,10 +84,24 @@ export default {
       };
     },
   },
-  methods: {},
-  created() {
-    this.onListenerInitGrid();
-    this.onListenerUpdateGrid();
+  watch: {
+    "$q.screen.width"() {
+      this.ActionSetDisplaySize({
+        width: this.$q.screen.width,
+        height: this.$q.screen.height - 3,
+      });
+      this.sendDisplaySize(this.displaySize);
+      console.log(this.displaySize);
+    },
+    "$q.screen.height"() {
+      this.ActionSetDisplaySize({
+        width: this.$q.screen.width,
+        height: this.$q.screen.height - 3,
+      });
+      this.sendDisplaySize(this.displaySize);
+      console.log(this.displaySize);
+    },
   },
+  methods: {},
 };
 </script>

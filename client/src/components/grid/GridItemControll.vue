@@ -3,8 +3,8 @@
     class="fit bg-grey-2"
     :flat="!item.maximize"
     bordered
-    @mouseenter="header('show')"
-    @mouseleave="header('hide')"
+    @mouseenter="headerApp('show')"
+    @mouseleave="headerApp('hide')"
   >
     <q-resize-observer @resize="onResizeGridItem" />
     <grid-item-header :item="item" :selectItem="selectItem" :size="size" />
@@ -57,7 +57,7 @@ export default {
     onResizeGridItem(size) {
       this.size = size;
     },
-    header(mode) {
+    headerApp(mode) {
       if (!this.item.maximize) {
         clearTimeout(this.time);
         if (mode === "show") this.selectItem = true;

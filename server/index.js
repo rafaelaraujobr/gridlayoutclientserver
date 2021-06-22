@@ -20,15 +20,29 @@ let displaySize = {
     height: 600
 };
 
+let mousePosition = {}
+
 
 socketio.on("connection", (socket) => {
     console.log("conected id:", socket.id);
     socketio.emit("init-grid", { data: { layoutGrid, optionsGrid, displaySize } });
 
+    socket.on("display-size", (eventData) => {
+        displaySize = eventData.message
+        socketio.emit("display-size", { data: displaySize });
+        console.log("display-size", eventData.message);
+    });
+
     socket.on("add-grid-item", (eventData) => {
         layoutGrid.push(eventData.message)
         socketio.emit("update-grid", { data: layoutGrid });
         console.log("add-grid-item", eventData.message);
+    });
+
+    socket.on("move-mouse", (eventData) => {
+        mousePosition = eventData.message
+        socketio.emit("move-mouse", { data: mousePosition });
+        console.log("move-mouse", eventData.message);
     });
 
     socket.on("remove-grid-item", (eventData) => {

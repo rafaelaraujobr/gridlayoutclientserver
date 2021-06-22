@@ -1,9 +1,15 @@
 <template>
-  <q-card flat bordered>
+  <q-card
+    flat
+    bordered
+    @click="eventClick($event)"
+    @mousemove="eventMouseMove($event, displaySizeControl)"
+  >
     <grid-layout
       :layout.sync="layoutControll"
       :col-num="optionGrid.colNum"
       :max-rows="optionGrid.maxRows"
+      :row-height="rowHeight"
       :is-draggable="true"
       :is-resizable="true"
       :is-mirrored="false"
@@ -63,17 +69,27 @@ export default {
     Launcher,
   },
   computed: {
+    displaySizeControl() {
+      let ratioWidthToHeight =
+        (this.displaySize.width - 51) / this.displaySize.height;
+      return {
+        height:
+          ((this.size.width - ratioWidthToHeight) * this.size.height) /
+          this.displaySize.width,
+        width: this.size.width,
+      };
+    },
     rowHeight() {
       return (
-        (this.displaySize.height -
+        (this.displaySizeControl.height -
           this.optionGrid.margin * (this.optionGrid.maxRows + 1)) /
         this.optionGrid.maxRows
       );
     },
     styleGrid() {
       return {
-        minHeight: `${this.displaySize.height}px`,
-        maxHeight: `${this.displaySize.height}px`,
+        minHeight: `${this.displaySizeControl.height}px`,
+        maxHeight: `${this.displaySizeControl.height}px`,
         backgroundSize: `calc(100% / ${this.optionGrid.colNum}) calc(100% / ${this.optionGrid.maxRows}`,
         backgroundImage: `
         linear-gradient(90deg,#e0e0e0, transparent 1px),
@@ -86,6 +102,7 @@ export default {
   methods: {},
   created() {
     this.onListenerInitGrid();
+    this.onListenerDisplaySize();
     this.onListenerUpdateGrid();
   },
 };

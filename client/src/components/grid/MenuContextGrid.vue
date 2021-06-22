@@ -8,9 +8,15 @@
     <q-list dense style="min-width: 180px">
       <q-item clickable v-close-popup @click="ActionSetLauncher(true)">
         <q-item-section avatar>
-          <q-icon name="mdi-launch" size="1.3rem" />
+          <q-icon name="mdi-rocket-launch-outline" size="1.3rem" />
         </q-item-section>
         <q-item-section>Launcher</q-item-section>
+      </q-item>
+       <q-item clickable v-close-popup @click="ActionSetPointer(!pointer)">
+        <q-item-section avatar>
+          <q-icon  :name="!pointer ? 'mdi-mouse' : 'mdi-mouse-off'" size="1.3rem" />
+        </q-item-section>
+        <q-item-section>Pointer</q-item-section>
       </q-item>
       <q-separator />
       <q-item

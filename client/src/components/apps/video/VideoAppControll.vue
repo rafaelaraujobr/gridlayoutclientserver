@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-dark">
     <q-icon
       :name="item.extras.icon"
       v-if="!item.extras.thumb"
@@ -12,9 +12,10 @@
       :src="item.extras.thumb"
       contain
       :style="`max-height:${
-        selectItem ? size.height - 34 : size.height - 2
+        selectItem ? size.height - 34 : size.height
       }px; height: ${selectItem ? size.height - 34 : size.height - 2}px;`"
     />
+    <div class="absolute-center">{{ size.height }}</div>
   </div>
 </template>
 
@@ -27,6 +28,8 @@ export default {
     item: Object,
     size: Object,
     selectItem: Boolean,
+  },
+  methods: {
   },
 };
 </script>

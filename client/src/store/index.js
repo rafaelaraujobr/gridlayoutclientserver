@@ -5,10 +5,19 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    header: true,
     layoutControll: [],
+    mouseEvent: null,
+    mousePosition: {
+      x: 0, y: 0
+    },
+    pointer: false,
     layoutDisplay: [],
     optionGrid: {},
-    displaySize: {},
+    displaySize: {
+      width: 800,
+      height: 600
+    },
     positionAddGridItem: {
       x: 0,
       y: 0
@@ -16,15 +25,24 @@ export default new Vuex.Store({
     launcher: false
   },
   getters: {
+    header: (state) => state.header,
     layoutControll: (state) => state.layoutControll,
     layoutDisplay: (state) => state.layoutDisplay,
     optionGrid: (state) => state.optionGrid,
     displaySize: (state) => state.displaySize,
     positionAddGridItem: (state) => state.positionAddGridItem,
-
     launcher: (state) => state.launcher,
+    mouseEvent: (state) => state.mouseEvent,
+    mousePosition: (state) => state.mousePosition,
+    pointer: (state) => state.pointer,
   },
   mutations: {
+    SET_HEADER(state, payload) {
+      state.header = payload;
+    },
+    SET_POINTER(state, payload) {
+      state.pointer = payload;
+    },
     SET_LAYOUTCONTROLL(state, payload) {
       state.layoutControll = payload;
     },
@@ -54,8 +72,21 @@ export default new Vuex.Store({
     SET_LAUNCHER(state, payload) {
       state.launcher = payload;
     },
+    SET_MOUSEEVENT(state, payload) {
+      state.mouseEvent = payload;
+    },
+    SET_MOUSEPOSITION(state, payload) {
+      state.mousePosition = payload;
+    },
   },
   actions: {
+    ActionSetHeader({ commit }, payload) {
+      console.log(payload)
+      commit("SET_HEADER", payload);
+    },
+    ActionSetPointer({ commit }, payload) {
+      commit("SET_POINTER", payload);
+    },
     ActionSetLayoutControll({ commit }, payload) {
       commit("SET_LAYOUTCONTROLL", payload);
     },
@@ -76,6 +107,12 @@ export default new Vuex.Store({
     },
     ActionSetLauncher({ commit }, payload) {
       commit("SET_LAUNCHER", payload);
+    },
+    ActionSetMouseEvent({ commit }, payload) {
+      commit("SET_MOUSEEVENT", payload);
+    },
+    ActionSetMousePosition({ commit }, payload) {
+      commit("SET_MOUSEPOSITION", payload);
     },
   },
   modules: {

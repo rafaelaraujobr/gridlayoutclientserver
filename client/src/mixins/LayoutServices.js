@@ -4,13 +4,17 @@ import { sendEvent, onListener } from "@/plugins/socketio";
 export default {
     methods: {
         ...mapActions([
+            "ActionSetHeader",
             "ActionSetLayoutControll",
             "ActionSetOptionGrid",
             "ActionSetDisplaySize",
             "ActionUpdateMovedLayout",
             "ActionUpdateResizedLayout",
             "ActionSetPositionAddGridItem",
-            "ActionSetLauncher"
+            "ActionSetLauncher",
+            "ActionSetPointer",
+            "ActionSetMouseEvent",
+            "ActionSetMousePosition"
         ]),
         async getCellFromPixel(event, id) {
             let el = document.getElementById(id);
@@ -61,6 +65,47 @@ export default {
         },
         maximizeGridItem(i, maximize) {
             this.sendMaximizeGridItem({ i, maximize })
+        },
+        eventClick(e) {
+            if (this.pointer) this.sendClickMouse(e);
+        },
+        eventMouseMove(e, size) {
+            if (this.pointer) {
+                let y
+                this.header ? y = e.clientY - 51 : e.clientY;
+                this.sendMoveMouse({
+                    x: e.clientX * (this.displaySize.width / size.width) - 10,
+                    y: y * (this.displaySize.height / size.height) - 10,
+                });
+            }
+        },
+        sendDisplaySize(data) {
+            sendEvent({
+                type: "display-size",
+                data: {
+                    message: data,
+                    sent: Date.now(),
+                },
+            });
+        },
+        sendClickMouse(data) {
+            console.log(data)
+            sendEvent({
+                type: "click-mouse",
+                data: {
+                    message: data,
+                    sent: Date.now(),
+                },
+            });
+        },
+        sendMoveMouse(data) {
+            sendEvent({
+                type: "move-mouse",
+                data: {
+                    message: data,
+                    sent: Date.now(),
+                },
+            });
         },
         sendAddGridItem(data) {
             sendEvent({
@@ -134,6 +179,38 @@ export default {
                 },
             });
         },
+        onListenerClickMouse() {
+            onListener({
+                type: "click-mouse",
+                callback: (message) => {
+                    if (message.data) {
+                        console.log('click-mouse', message.data);
+                    }
+                },
+            });
+        },
+        onListenerDisplaySize() {
+            onListener({
+                type: "display-size",
+                callback: (message) => {
+                    if (message.data) {
+                        console.log('display-size', message.data);
+                        this.ActionSetDisplaySize(message.data)
+                    }
+                },
+            });
+        },
+        onListenerMoveMouse() {
+            onListener({
+                type: "move-mouse",
+                callback: (message) => {
+                    if (message.data) {
+                        console.log(message.data)
+                        this.ActionSetMousePosition(message.data)
+                    }
+                },
+            });
+        },
         onListenerUpdateGrid() {
             onListener({
                 type: "update-grid",
@@ -160,11 +237,15 @@ export default {
     },
     computed: {
         ...mapGetters([
+            "header",
             "layoutControll",
             "optionGrid",
             "displaySize",
             "positionAddGridItem",
-            "launcher"
+            "launcher",
+            "mousePosition",
+            "mouseEvent",
+            "pointer"
         ]),
         maximizeStyle() {
             return {

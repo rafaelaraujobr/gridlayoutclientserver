@@ -1,29 +1,22 @@
 <template>
-  <q-page>
-    <q-resize-observer @resize="onResize" debounce="5000" />
-    <grid-display :size="size" />
-  </q-page>
+  <grid-display />
 </template>
 
 <script>
 import GridDisplay from "../components/grid/GridDisplay.vue";
+import LayoutServices from "@/mixins/LayoutServices";
 export default {
   name: "Display",
-  data() {
-    return {
-      size: {
-        height: 600,
-        width: 800,
-      },
-    };
-  },
+  mixins: [LayoutServices],
   components: {
     GridDisplay,
   },
-  methods: {
-    onResize(size) {
-      this.size = size;
-    },
+  created() {
+    this.ActionSetHeader(false);
+    this.onListenerInitGrid();
+    this.onListenerClickMouse();
+    this.onListenerMoveMouse();
+    this.onListenerUpdateGrid();
   },
 };
 </script>
