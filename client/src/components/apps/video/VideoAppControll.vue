@@ -15,7 +15,6 @@
         selectItem ? size.height - 34 : size.height
       }px; height: ${selectItem ? size.height - 34 : size.height - 2}px;`"
     />
-    <div class="absolute-center">{{ size.height }}</div>
   </div>
 </template>
 
@@ -31,6 +30,11 @@ export default {
   },
   methods: {
   },
+  computed:{
+
+  }
+
+
 };
 </script>
 

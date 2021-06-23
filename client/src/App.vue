@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh Lpr lFf">
-    <q-header v-if="header" bordered class="bg-white text-dark">
+    <q-header v-if="header">
       <q-toolbar>
         <q-btn
           flat
@@ -12,9 +12,9 @@
           icon="menu"
           size="1rem"
         />
-        <q-separator vertical spaced />
+        <q-separator vertical spaced  dark/>
         <q-toolbar-title>Controll - POC</q-toolbar-title>
-        <q-separator vertical spaced />
+        <q-separator vertical spaced dark />
         <q-btn
           flat
           dense
