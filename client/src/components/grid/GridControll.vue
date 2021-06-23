@@ -3,7 +3,7 @@
     flat
     bordered
     @click="eventClick($event)"
-    @mousemove="eventMouseMove($event, displaySizeControl)"
+    @mousemove="eventMouseMove($event, displaySizeControll)"
   >
     <grid-layout
       :layout.sync="layoutControll"
@@ -53,9 +53,6 @@ import Launcher from "../launcher/Launcher.vue";
 export default {
   name: "GridControll",
   mixins: [LayoutServices],
-  props: {
-    size: Object,
-  },
   data() {
     return {
       positionSelect: {},
@@ -69,27 +66,27 @@ export default {
     Launcher,
   },
   computed: {
-    displaySizeControl() {
+    displaySizeControll() {
       let ratioWidthToHeight =
         (this.displaySize.width - 51) / this.displaySize.height;
       return {
         height:
-          ((this.size.width - ratioWidthToHeight) * this.size.height) /
-          this.displaySize.width,
-        width: this.size.width,
+          ((this.$q.screen.width - ratioWidthToHeight) * this.displaySize.height) /
+          this.displaySize.width || 600,
+        width: this.$q.screen.width || 800
       };
     },
     rowHeight() {
       return (
-        (this.displaySizeControl.height -
+        (this.displaySizeControll.height -
           this.optionGrid.margin * (this.optionGrid.maxRows + 1)) /
         this.optionGrid.maxRows
       );
     },
     styleGrid() {
       return {
-        minHeight: `${this.displaySizeControl.height}px`,
-        maxHeight: `${this.displaySizeControl.height}px`,
+        minHeight: `${this.displaySizeControll.height}px`,
+        maxHeight: `${this.displaySizeControll.height}px`,
         backgroundSize: `calc(100% / ${this.optionGrid.colNum}) calc(100% / ${this.optionGrid.maxRows}`,
         backgroundImage: `
         linear-gradient(90deg,#e0e0e0, transparent 1px),
