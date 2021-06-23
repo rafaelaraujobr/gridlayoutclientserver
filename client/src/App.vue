@@ -12,7 +12,7 @@
           icon="menu"
           size="1rem"
         />
-        <q-separator vertical spaced  dark/>
+        <q-separator vertical spaced dark />
         <q-toolbar-title>Controll - POC</q-toolbar-title>
         <q-separator vertical spaced dark />
         <q-btn
@@ -100,9 +100,7 @@ export default {
     };
   },
   created() {
-    if (this.$q.platform.is.electron) {
-      this.$router.push({ name: "Display" });
-    }
+    if (this.$q.platform.is.electron) this.$router.push({ name: "Display" });
   },
 };
 </script>

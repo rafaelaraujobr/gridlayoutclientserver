@@ -1,10 +1,17 @@
 <template>
-  <webview
-    useragent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.41"
-    :src="item.extras.url"
-    class="fit rounded-borders"
-    ref="webview"
-  ></webview>
+  <div class="fit rounded-borders">
+    <webview
+      v-if="$q.platform.is.electron"
+      useragent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.41"
+      :src="item.extras.url"
+      class="fit rounded-borders"
+      ref="webview"
+    ></webview>
+    <div v-if="!$q.platform.is.electron" class="absolute-center text-center">
+      <q-icon name="mdi-electron-framework"   :size="`${item.h * 4}rem`" />
+      <div>Available by electron</div>
+    </div>
+  </div>
 </template>
 
 <script>
