@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <grid-controller  />
+      <grid-controller />
   </q-page>
 </template>
 

@@ -4,6 +4,8 @@
     bordered
     @click="eventClick($event)"
     @mousemove="eventMouseMove($event, displaySizeControll)"
+    class="full-width"
+    :style="marginTop"
   >
     <grid-layout
       :layout.sync="layoutControll"
@@ -50,6 +52,7 @@ import LayoutServices from "@/mixins/LayoutServices";
 import MenuContextGrid from "./MenuContextGrid.vue";
 import GridItemControll from "@/components/grid/GridItemControll.vue";
 import Launcher from "../launcher/Launcher.vue";
+import { uid } from "quasar";
 export default {
   name: "GridControll",
   mixins: [LayoutServices],
@@ -71,9 +74,10 @@ export default {
         (this.displaySize.width - 51) / this.displaySize.height;
       return {
         height:
-          ((this.$q.screen.width - ratioWidthToHeight) * this.displaySize.height) /
-          this.displaySize.width || 600,
-        width: this.$q.screen.width || 800
+          ((this.$q.screen.width - ratioWidthToHeight) *
+            this.displaySize.height) /
+            this.displaySize.width || 600,
+        width: this.$q.screen.width || 800,
       };
     },
     rowHeight() {
@@ -82,6 +86,12 @@ export default {
           this.optionGrid.margin * (this.optionGrid.maxRows + 1)) /
         this.optionGrid.maxRows
       );
+    },
+    marginTop() {
+      let top =
+        (this.$q.screen.height + 51) / 2 - this.displaySizeControll.height / 2;
+
+      return { top: top < 0 ? 51 : top + "px", position: "fixed" };
     },
     styleGrid() {
       return {
@@ -94,6 +104,15 @@ export default {
         linear-gradient( #e0e0e0, transparent 1px),
         linear-gradient(transparent calc(100% - 1px),#e0e0e0 100%)`,
       };
+    },
+    layoutGuide() {
+      let layout = [];
+      for (let row = 0; row < this.optionGrid.maxRows; row++) {
+        for (let col = 0; col <= this.optionGrid.colNum; col++) {
+          layout.push({ x: col, y: row, h: 1, w: 1, i: uid() });
+        }
+      }
+      return layout;
     },
   },
   methods: {},

@@ -1,5 +1,5 @@
 <template>
-  <q-card flat>
+  <q-card flat class="bg-transparent">
     <grid-layout
       :layout.sync="layoutControll"
       :col-num="optionGrid.colNum"
@@ -77,10 +77,8 @@ export default {
         maxHeight: `${this.displaySize.height}px`,
         backgroundSize: `calc(100% / ${this.optionGrid.colNum}) calc(100% / ${this.optionGrid.maxRows}`,
         backgroundImage: `
-        linear-gradient(90deg,#e0e0e0, transparent 1px),
-        linear-gradient(90deg, transparent calc(100% - 1px), #e0e0e0),
-        linear-gradient( #e0e0e0, transparent 1px),
-        linear-gradient(transparent calc(100% - 1px),#e0e0e0 100%)`,
+        linear-gradient(90deg,#027BE3, transparent 1px),
+        linear-gradient( #027BE3, transparent 1px)`,
       };
     },
   },
