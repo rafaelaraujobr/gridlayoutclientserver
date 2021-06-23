@@ -1,7 +1,7 @@
 <template>
   <q-intersection transition="jump-down" v-show="selectItem">
     <q-toolbar
-      class="q-pr-none q-pl-xs bg-transparent non-selectable header-app"
+      class="q-pr-none q-pl-xs bg-grey-4 non-selectable header-app"
       v-if="selectItem"
     >
       <q-icon :name="item.extras.icon" size="sm" class="q-px-none" />

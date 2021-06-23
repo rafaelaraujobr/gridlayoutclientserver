@@ -13,7 +13,11 @@
           size="1rem"
         />
         <q-separator vertical spaced dark />
-        <q-toolbar-title>Controll - POC</q-toolbar-title>
+        <q-toolbar-title>
+          <img
+            :src="require('@/assets/images/logo_white.svg')"
+            :height="16"
+        /></q-toolbar-title>
         <q-separator vertical spaced dark />
         <q-btn
           flat

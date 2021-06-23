@@ -10,7 +10,7 @@
         <q-item-section avatar>
           <q-icon name="mdi-rocket-launch-outline" size="1.3rem" />
         </q-item-section>
-        <q-item-section>Launcher</q-item-section>
+        <q-item-section>App Launcher</q-item-section>
       </q-item>
        <q-item clickable v-close-popup @click="ActionSetPointer(!pointer)">
         <q-item-section avatar>

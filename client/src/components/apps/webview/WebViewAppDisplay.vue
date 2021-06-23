@@ -8,7 +8,7 @@
       ref="webview"
     ></webview>
     <div v-if="!$q.platform.is.electron" class="absolute-center text-center">
-      <q-icon name="mdi-electron-framework"   :size="`${item.h * 4}rem`" />
+      <q-icon name="mdi-electron-framework" :size="`${item.h * 4}rem`" />
       <div>Available by electron</div>
     </div>
   </div>
@@ -69,7 +69,7 @@ export default {
   },
   mounted() {
     this.time = setInterval(() => {
-      this.screenShot(this.$el);
+      if (this.$q.platform.is.electron) this.screenShot(this.$el);
     }, 5000);
   },
 
