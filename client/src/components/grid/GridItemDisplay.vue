@@ -8,11 +8,11 @@
 <script>
 import LayoutServices from "@/mixins/LayoutServices";
 
-import VideoApp from "@/components/apps/video/VideoAppDisplay";
-import WebViewApp from "@/components/apps/webview/WebViewAppDisplay";
-import PdfApp from "@/components/apps/pdf/PdfAppDisplay";
-import ImageApp from "@/components/apps/image/ImageAppDisplay";
-import ClockApp from "@/components/apps/clock/ClockAppDisplay";
+import VideoApp from "@/apps/video/VideoAppDisplay";
+import WebViewApp from "@/apps/webview/WebViewAppDisplay";
+import PdfApp from "@/apps/pdf/PdfAppDisplay";
+import ImageApp from "@/apps/image/ImageAppDisplay";
+import ClockApp from "@/apps/clock/ClockAppDisplay";
 export default {
   name: "GridItemDisplay",
   mixins: [LayoutServices],

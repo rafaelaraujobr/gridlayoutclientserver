@@ -23,11 +23,11 @@ import LayoutServices from "@/mixins/LayoutServices";
 import GridItemHeader from "./GridItemHeader.vue";
 
 //apps
-import VideoApp from "@/components/apps/video/VideoAppControll";
-import WebViewApp from "@/components/apps/webview/WebViewAppControll";
-import PdfApp from "@/components/apps/pdf/PdfAppControll";
-import ImageApp from "@/components/apps/image/ImageAppControll";
-import ClockApp from "@/components/apps/clock/ClockAppControll";
+import VideoApp from "@/apps/video/VideoAppControll";
+import WebViewApp from "@/apps/webview/WebViewAppControll";
+import PdfApp from "@/apps/pdf/PdfAppControll";
+import ImageApp from "@/apps/image/ImageAppControll";
+import ClockApp from "@/apps/clock/ClockAppControll";
 
 export default {
   name: "GridItemControll",
