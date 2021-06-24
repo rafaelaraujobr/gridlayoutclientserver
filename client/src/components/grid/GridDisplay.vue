@@ -15,6 +15,11 @@
       id="gridControl"
       :style="styleGrid"
     >
+      <img
+        class="absolute-center"
+        :src="require('@/assets/images/logo_color.svg')"
+        style="opacity: 0.2; width: 40vw"
+      />
       <grid-item
         v-for="item in layoutControll"
         :x="item.x"
@@ -35,7 +40,8 @@
       name="mdi-cursor-pointer"
       size="md"
       color="primary"
-      :style="`top:${mousePosition.y}px;left:${mousePosition.x}px; position:absolute`"
+      class="q-pa-none q-ma-none"
+      :style="`top:${mousePosition.y}px;left:${mousePosition.x}px; position:fixed`"
     />
   </q-card>
 </template>
@@ -86,7 +92,7 @@ export default {
     "$q.screen.width"() {
       this.ActionSetDisplaySize({
         width: this.$q.screen.width,
-        height: this.$q.screen.height - 3,
+        height: this.$q.screen.height - 51,
       });
       this.sendDisplaySize(this.displaySize);
       console.log(this.displaySize);
@@ -94,7 +100,7 @@ export default {
     "$q.screen.height"() {
       this.ActionSetDisplaySize({
         width: this.$q.screen.width,
-        height: this.$q.screen.height - 3,
+        height: this.$q.screen.height - 51,
       });
       this.sendDisplaySize(this.displaySize);
       console.log(this.displaySize);

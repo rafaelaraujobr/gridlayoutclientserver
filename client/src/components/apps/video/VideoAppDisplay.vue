@@ -1,14 +1,23 @@
 <template>
-  <video
-    :width="size.width"
-    :height="size.height"
-    autoplay
-    loop
-    :muted="item.extras.mute"
-    class="bg-dark rounded-borders"
-  >
-    <source :src="require('@/assets/' + item.extras.url)" type="video/mp4" />
-  </video>
+  <div class="fit">
+    <video
+      :width="size.width"
+      :height="size.height"
+      autoplay
+      loop
+      :muted="item.extras.mute"
+      class="bg-dark rounded-borders"
+      ref="video"
+    >
+      <source :src="require('@/assets/' + item.extras.url)" type="video/mp4" />
+    </video>
+    <q-icon
+      :name="!item.extras.mute ? 'mdi-volume-high' : 'mdi-volume-off'"
+      class="absolute-right q-pa-xs"
+      color="grey-3"
+      size="sm"
+    />
+  </div>
 </template>
 
 <script>
@@ -25,7 +34,7 @@ export default {
       time: null,
       quality: 0.5,
       interval: 3000,
-      proportion:2
+      proportion: 2,
     };
   },
   methods: {
@@ -34,7 +43,13 @@ export default {
       let context = canvas.getContext("2d");
       canvas.width = this.size.width / this.proportion;
       canvas.height = this.size.height / this.proportion;
-      context.drawImage(el, 0, 0, this.size.width / this.proportion, this.size.height / this.proportion);
+      context.drawImage(
+        el,
+        0,
+        0,
+        this.size.width / this.proportion,
+        this.size.height / this.proportion
+      );
       let base64Image = canvas.toDataURL("image/jpeg", this.quality);
       this.sendThumbGridItem({
         i: this.item.i,
@@ -44,7 +59,7 @@ export default {
   },
   mounted() {
     this.time = setInterval(() => {
-      this.screenShot(this.$el);
+      this.screenShot(this.$refs.video);
     }, this.interval);
   },
 

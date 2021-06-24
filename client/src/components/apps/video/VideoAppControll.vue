@@ -7,13 +7,20 @@
       class="absolute-center"
     />
     <q-img
-      v-if="item.extras.thumb"
+      v-show="item.extras.thumb"
       class="rounded-borders"
       :src="item.extras.thumb"
       contain
       :style="`max-height:${
         selectItem ? size.height - 34 : size.height
       }px; height: ${selectItem ? size.height - 34 : size.height - 2}px;`"
+    />
+    <q-icon
+      v-show="!selectItem"
+      :name="!item.extras.mute ? 'mdi-volume-high' : 'mdi-volume-off'"
+      class="absolute-right q-pa-xs"
+      color="grey-3"
+      size="sm"
     />
   </div>
 </template>
@@ -28,13 +35,8 @@ export default {
     size: Object,
     selectItem: Boolean,
   },
-  methods: {
-  },
-  computed:{
-
-  }
-
-
+  methods: {},
+  computed: {},
 };
 </script>
 

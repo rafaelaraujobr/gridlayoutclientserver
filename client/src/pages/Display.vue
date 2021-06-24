@@ -1,29 +1,35 @@
 <template>
-  <div
-    class="fullscreen"
-    style="
-      background-image: linear-gradient(
-        105.3deg,
-        rgba(30, 39, 107, 1) 21.8%,
-        rgba(77, 118, 221, 1) 100.2%
-      ) !important;
-    "
-  >
-    <grid-display />
-    <particles-bg
-      v-if="activeParticle"
-      type="cobweb"
-      color="#027BE3"
-      :bg="true"
-      :num="100"
-      alpha=" [0.5,0.5]"
-    />
-  </div>
+  <q-layout view="hHh Lpr lFf">
+    <q-header>
+      <q-toolbar>
+        <q-toolbar-title>
+          <img
+            :src="require('@/assets/images/logo_white.svg')"
+            :height="16"
+            class="non-selectable"
+        /></q-toolbar-title>
+        <div class="q-px-md text-weight-medium">{{ip}}</div>
+        <q-separator vertical spaced dark />
+        <q-btn
+          flat
+          dense
+          no-caps
+          @click="$q.fullscreen.toggle()"
+          :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
+          size="1rem"
+        />
+      </q-toolbar>
+    </q-header>
+    <q-page-container class="bg-grey-2">
+      <q-page>
+        <grid-display />
+      </q-page>
+    </q-page-container>
+  </q-layout>
 </template>
 
 <script>
 import LayoutServices from "@/mixins/LayoutServices";
-import { ParticlesBg } from "particles-bg-vue";
 import GridDisplay from "@/components/grid/GridDisplay.vue";
 
 export default {
@@ -31,16 +37,13 @@ export default {
   mixins: [LayoutServices],
   components: {
     GridDisplay,
-    ParticlesBg,
   },
-  computed: {
-    activeParticle() {
-      if (this.layoutControll.length > 0) return false;
-      else return true;
-    },
+  computed:{
+    ip(){
+      return window.location.protocol + "//" + window.location.host;
+    }
   },
   created() {
-    this.ActionSetHeader(false);
     this.onListenerInitGrid();
     this.onListenerClickMouse();
     this.onListenerMoveMouse();

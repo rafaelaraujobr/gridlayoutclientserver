@@ -1,17 +1,7 @@
 <template>
-  <q-card
-    class="fit bg-grey-2"
-    flat
-    bordered
-  >
+  <q-card class="fit bg-dark" flat bordered>
     <q-resize-observer @resize="onResizeGridItem" />
     <component :is="item.type + '-app'" :item="item" :size="size" />
-    <q-icon
-      :name="!item.extras.mute ? 'mdi-volume-high' : 'mdi-volume-off'"
-      class="absolute-right q-pa-xs"
-      color="grey-3"
-      size="sm"
-    />
   </q-card>
 </template>
 
@@ -22,6 +12,7 @@ import VideoApp from "@/components/apps/video/VideoAppDisplay";
 import WebViewApp from "@/components/apps/webview/WebViewAppDisplay";
 import PdfApp from "@/components/apps/pdf/PdfAppDisplay";
 import ImageApp from "@/components/apps/image/ImageAppDisplay";
+import ClockApp from "@/components/apps/clock/ClockAppDisplay";
 export default {
   name: "GridItemDisplay",
   mixins: [LayoutServices],
@@ -32,7 +23,8 @@ export default {
     VideoApp,
     WebViewApp,
     PdfApp,
-    ImageApp
+    ImageApp,
+    ClockApp,
   },
   data() {
     return {

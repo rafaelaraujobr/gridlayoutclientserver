@@ -27,6 +27,7 @@ import VideoApp from "@/components/apps/video/VideoAppControll";
 import WebViewApp from "@/components/apps/webview/WebViewAppControll";
 import PdfApp from "@/components/apps/pdf/PdfAppControll";
 import ImageApp from "@/components/apps/image/ImageAppControll";
+import ClockApp from "@/components/apps/clock/ClockAppControll";
 
 export default {
   name: "GridItemControll",
@@ -40,6 +41,7 @@ export default {
     WebViewApp,
     PdfApp,
     ImageApp,
+    ClockApp,
   },
   data() {
     return {

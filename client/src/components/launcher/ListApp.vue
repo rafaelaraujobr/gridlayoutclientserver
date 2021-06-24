@@ -134,6 +134,14 @@ export default {
           },
         },
         {
+          name: "Clock",
+          author: "Rafael Araujo",
+          type: "clock",
+          extras: {
+            icon: "mdi-clock-time-four-outline",
+          },
+        },
+        {
           name: "Google",
           author: "Rafael Araujo",
           type: "web-view",

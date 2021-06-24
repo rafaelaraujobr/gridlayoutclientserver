@@ -4,7 +4,7 @@ let socket = undefined;
 const localIP = "localhost";
 const networkIP = "192.168.1.5";
 const port = 3000;
-const networkConnection = false;
+const networkConnection = true;
 
 function initialiseSocket() {
   const url = networkConnection

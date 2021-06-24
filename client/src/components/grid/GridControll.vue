@@ -4,8 +4,6 @@
     bordered
     @click="eventClick($event)"
     @mousemove="eventMouseMove($event, displaySizeControll)"
-    class="full-width"
-    :style="marginTop"
   >
     <grid-layout
       :layout.sync="layoutControll"
@@ -22,6 +20,11 @@
       id="gridControl"
       :style="styleGrid"
     >
+      <img
+        class="absolute-center"
+        :src="require('@/assets/images/logo_grey.svg')"
+        style="opacity: 0.2; width: 40vw"
+      />
       <menu-context-grid />
       <grid-item
         v-for="item in layoutControll"
@@ -39,6 +42,12 @@
         <grid-item-controll :item="item" />
       </grid-item>
     </grid-layout>
+    <!-- <q-icon
+      name="mdi-cursor-pointer"
+      size="md"
+      color="primary"
+      :style="`top:${mousePosition.y}px;left:${mousePosition.x}px; position:fixed`"
+    /> -->
     <launcher />
   </q-card>
 </template>
@@ -70,14 +79,11 @@ export default {
   },
   computed: {
     displaySizeControll() {
-      let ratioWidthToHeight =
-        (this.displaySize.width - 51) / this.displaySize.height;
       return {
         height:
-          ((this.$q.screen.width - ratioWidthToHeight) *
-            this.displaySize.height) /
-            this.displaySize.width || 600,
-        width: this.$q.screen.width || 800,
+          (this.$q.screen.width * this.displaySize.height) /
+          this.displaySize.width,
+        width: this.$q.screen.width,
       };
     },
     rowHeight() {

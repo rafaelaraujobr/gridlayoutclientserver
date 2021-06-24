@@ -12,7 +12,7 @@ let layoutGrid = []
 let optionsGrid = {
     maxRows: 4,
     colNum: 6,
-    margin: 0
+    margin: 5
 };
 
 let displaySize = {
@@ -96,6 +96,12 @@ socketio.on("connection", (socket) => {
     });
 
     socket.on("maximize-grid-item", (eventData) => {
+        const itemMaximize = layoutGrid.find(item => item.maximize == true)
+        if (itemMaximize) {
+            let itemChange = { ...itemMaximize }
+            itemChange.maximize = false
+            Object.assign(itemMaximize, itemChange)
+        }
         const item = layoutGrid.find(item => item.i == eventData.message.i)
         let newItem = { ...item }
         newItem.maximize = eventData.message.maximize

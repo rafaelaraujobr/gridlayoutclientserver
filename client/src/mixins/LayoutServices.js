@@ -71,12 +71,15 @@ export default {
         },
         eventMouseMove(e, size) {
             if (this.pointer) {
-                let y
-                this.header ? y = e.clientY - 51 : e.clientY;
+                this.ActionSetMousePosition({
+                    x: e.clientX,
+                    y: e.clientY,
+                })
                 this.sendMoveMouse({
-                    x: e.clientX * (this.displaySize.width / size.width) - 10,
-                    y: y * (this.displaySize.height / size.height) - 10,
+                    x: e.clientX * (this.displaySize.width / size.width),
+                    y: e.clientY * (this.displaySize.height / size.height),
                 });
+
             }
         },
         sendDisplaySize(data) {

@@ -1,16 +1,17 @@
 <template>
   <q-intersection transition="jump-down" v-show="selectItem">
     <q-toolbar
-      class="q-pr-none q-pl-xs bg-grey-4 non-selectable header-app"
+      class="q-pr-none q-pl-xs bg-grey-3 non-selectable header-app"
       v-if="selectItem"
     >
       <q-icon :name="item.extras.icon" size="sm" class="q-px-none" />
-      <q-toolbar-title class="text-body2 q-pl-xs">
+      <q-toolbar-title class="text-body2 q-pl-xs text-weight-medium">
         {{ item.name }}
       </q-toolbar-title>
       <q-btn-group flat v-if="size.width >= 300">
         <q-btn
           flat
+          v-if="mute"
           dense
           :icon="!item.extras.mute ? 'mdi-volume-high' : 'mdi-volume-off'"
           class="q-px-xs"
@@ -47,7 +48,7 @@
           <q-list style="min-width: 100px" dense>
             <q-item
               clickable
-              v-close-popup
+              v-close-popup v-if="mute"
               @click="muteGridItem(item.i, !item.extras.mute)"
             >
               <q-item-section avatar>
@@ -102,6 +103,18 @@ export default {
     selectItem: Boolean,
     item: Object,
     size: Object,
+  },
+  computed: {
+    mute() {
+      switch (this.item.type) {
+        case "video":
+          return true;
+        case "web-view":
+          return true;
+        default:
+          return false;
+      }
+    },
   },
 };
 </script>

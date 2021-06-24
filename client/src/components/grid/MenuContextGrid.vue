@@ -12,9 +12,12 @@
         </q-item-section>
         <q-item-section>App Launcher</q-item-section>
       </q-item>
-       <q-item clickable v-close-popup @click="ActionSetPointer(!pointer)">
+      <q-item clickable v-close-popup @click="ActionSetPointer(!pointer)">
         <q-item-section avatar>
-          <q-icon  :name="!pointer ? 'mdi-mouse' : 'mdi-mouse-off'" size="1.3rem" />
+          <q-icon
+            :name="!pointer ? 'mdi-mouse' : 'mdi-mouse-off'"
+            size="1.3rem"
+          />
         </q-item-section>
         <q-item-section>Pointer</q-item-section>
       </q-item>
@@ -58,6 +61,26 @@
           <q-icon name="mdi-google" size="1.3rem" />
         </q-item-section>
         <q-item-section>Google</q-item-section>
+      </q-item>
+      <q-separator />
+      <q-item
+        clickable
+        v-close-popup
+        @click="
+          addFastGridItem({
+            name: 'Clock',
+            author: 'Rafael Araujo',
+            type: 'clock',
+            extras: {
+              icon: 'mdi-clock-time-four-outline',
+            },
+          })
+        "
+      >
+        <q-item-section avatar>
+          <q-icon name="mdi-clock-time-four-outline" size="1.3rem" />
+        </q-item-section>
+        <q-item-section>Clock</q-item-section>
       </q-item>
     </q-list>
   </q-menu>

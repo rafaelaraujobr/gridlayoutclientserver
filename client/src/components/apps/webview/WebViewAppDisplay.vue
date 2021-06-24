@@ -11,6 +11,12 @@
       <q-icon name="mdi-electron-framework" :size="`${item.h * 4}rem`" />
       <div>Available by electron</div>
     </div>
+    <q-icon   v-if="$q.platform.is.electron"
+      :name="!item.extras.mute ? 'mdi-volume-high' : 'mdi-volume-off'"
+      class="absolute-right q-pa-xs"
+      color="grey-3"
+      size="sm"
+    />
   </div>
 </template>
 
