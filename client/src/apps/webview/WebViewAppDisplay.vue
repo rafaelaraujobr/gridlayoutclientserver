@@ -7,7 +7,7 @@
       class="fit rounded-borders"
       ref="webview"
     ></webview>
-    <div v-if="!$q.platform.is.electron" class="absolute-center text-center">
+    <div v-if="!$q.platform.is.electron" class="absolute-center text-center text-white">
       <q-icon name="mdi-electron-framework" :size="`${item.h * 4}rem`" />
       <div>Available by electron</div>
     </div>
